@@ -9,8 +9,10 @@
 
             ga('create', 'UA-104903648-2', 'auto', 'myTracker');
             ga('send', 'pageview');
-            ga(function() {
-                console.log(ga.getByName('myTracker'));
+            ga(function(tracker) {
+              console.log('name: '+tracker.get('name'));
+              console.log('clientId: ' +tracker.get('clientId'));
+              console.log('referrer' +tracker.get('referrer'));
             });
 
         </script>
