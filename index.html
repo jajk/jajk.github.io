@@ -17,19 +17,20 @@
                 console.log('end message');
             });
 
-            ga('set', 'dimension1', 'Liunian');
-            ga('set', 'metric1', 25);
             ga('set', {
                 page: '/about',
                 title: 'About us'
             });
-            ga('send', 'pageview');
+            ga('send', 'pageview', {
+                'dimension1': 'Liunian'
+            });
 
             ga('send', {
                 hitType: 'event',
                 eventCategory: 'Videos LM',
                 eventAction: 'Click',
-                eventLabel: 'Fall Campaign'
+                eventLabel: 'Fall Campaign',
+                'metric1', 25
             });
 
         </script>
