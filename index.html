@@ -2,18 +2,18 @@
 <html>
     <head>
         <script>
+
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
             ga('create', 'UA-104903648-2', 'auto', 'myTracker');
-            //ga('send', 'pageview');
-            ga(function(tracker) {
-              console.log('name: '+tracker.get('name'));
-              console.log('clientId: ' +tracker.get('clientId'));
-              console.log('referrer' +tracker.get('referrer'));
+            ga('set', {
+                name: 'Liunian',
+                age: '25'
             });
+            ga('send', 'pageview');
 
         </script>
     </head>
