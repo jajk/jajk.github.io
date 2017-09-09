@@ -1,62 +1,24 @@
 <!doctype html>
 <html>
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta http-equiv="cache-control" content="no-cache" />
-        <title>surpriseYou</title>
-        <style>
-            html, body {
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-            body {
-                position: relative;
-            }
-            #div {
-                background: white;
-                color: #fff;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                height: 100px;
-                width: 500px;
-                margin: -120px 0 0 -120px;
-            }
-            a{
-                text-decoration: none;
-                font-size: 50pt;
-                font-weight:bold;
-            }
-        </style>
+        <script>
+
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-104903648-2', 'auto');
+
+            ga('send', {
+                hitType: 'pageview',
+                page: '/about',
+                title: 'About us'
+            });
+
+        </script>
     </head>
     <body>
-        <div id="div">
-            <a href="flower/twoFlower.htm">click me&nbsp;<span id="face">^.^</span></a>
-        </div>
-
-        <script>
-            function initArray() {
-                for (var i = 0; i < initArray.arguments.length; i++) {
-                    this[i] = initArray.arguments[i];
-                }
-                this.length = initArray.arguments.length;
-            }
-
-            var colors = new initArray(
-                "#000000","#0000FF","#80FFFF","#80FF80","#FFFF00","#FF8000","#FF00FF","#FF0000"
-            );
-            delay = 100
-            link = 0;
-            vlink = 0;
-
-            function linkDance() {
-                link = (link+1)%colors.length;
-                vlink = (vlink+1)%colors.length;
-                document.getElementById("face").style.color=colors[link];
-                setTimeout("linkDance()",delay);
-            }
-            linkDance();
-        </script>
+        <p>Hello World</p>
     </body>
 </html>
