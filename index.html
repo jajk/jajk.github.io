@@ -1,62 +1,142 @@
-<!doctype html>
-<html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="cache-control" content="no-cache" />
-    <title>surpriseYou</title>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            position: relative;
-        }
-        #div {
-            background: white;
-            color: #fff;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            height: 100px;
-            width: 500px;
-            margin: -120px 0 0 -120px;
-        }
-        a{
-            text-decoration: none;
-            font-size: 50pt;
-            font-weight:bold;
-        }
-    </style>
-</head>
-<body>
-<div id="div">
-    <a href="flower/twoFlower.htm">click me&nbsp;<span id="face">^.^</span></a>
-</div>
-
-<script>
-    function initArray() {
-        for (var i = 0; i < initArray.arguments.length; i++) {
-            this[i] = initArray.arguments[i];
-        }
-        this.length = initArray.arguments.length;
-    }
-
-    var colors = new initArray(
-        "#000000","#0000FF","#80FFFF","#80FF80","#FFFF00","#FF8000","#FF00FF","#FF0000"
-    );
-    delay = 100
-    link = 0;
-    vlink = 0;
-
-    function linkDance() {
-        link = (link+1)%colors.length;
-        vlink = (vlink+1)%colors.length;
-        document.getElementById("face").style.color=colors[link];
-        setTimeout("linkDance()",delay);
-    }
-    linkDance();
-</script>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	    <meta charset="utf-8"/>
+        <title>threshodsTable</title>
+		<link rel="stylesheet" type="text/css" href="./css/thresholds.css"/>
+    </head>
+    <body>
+        <script src="js/library/jquery-1.8.2.min.js"></script>
+		<script src="js/library/underscore.js"></script>
+		<script src="js/library/backbone.js"></script>
+		<script src="js/thresholds.js"></script>
+        <script>
+		    $(function(){
+                var str = "< 1 ,(23:00 15:00) > 8 9 10,(02:00 20:00) = 5";			
+				new ThresholdComponent(str);	
+			});
+		</script> 
+		
+        <script type="text/template" id="thresholdTable-template">
+		    <div class="thresholdsHeadRow thresholdsCellTheader">
+			    <div class="thresholdsCell noCellBorder">&nbsp;</div>
+			    <div class="thresholdsCell">From</div>
+				<div class="thresholdsCell">Unit</div>
+				<div class="thresholdsCell">Comparison</div>
+				<div class="thresholdsCell noCellBorder">Alerts</div>
+				<div class="thresholdsCell noCellBorder">&nbsp;</div>
+			</div>
+			<div class="addThresholdRow">
+			    <div class="thresholdsCell noCellBorder">&nbsp;</div>
+				<div class="thresholdsCell">
+					<div class="addThresholdOutter">
+					    <input type="text" id="addThreshold" 
+						placeholder="add a new threshold (+)"/>
+					</div>
+				</div>
+				<div class="thresholdsCell">&nbsp;</div>
+				<div class="thresholdsCell">&nbsp;</div>
+				<div class="thresholdsCell noCellBorder">&nbsp;</div>
+				<div class="thresholdsCell noCellBorder">&nbsp;</div>
+			</div>
+			<div class="thresholdsTbody">
+			    <!--PlaceHolder-->
+			</div>    
+			<div class="thresholdsFooter">
+				<div class="timeChartOuter">
+					<div class="timeChartInner">
+						<div class="timeChartTime">02:00</div>
+						<div class="timeChartTime">04:00</div>
+						<div class="timeChartTime">06:00</div>
+						<div class="timeChartTime">08:00</div>
+						<div class="timeChartTime">10:00</div>
+						<div class="timeChartTime">12:00</div>
+						<div class="timeChartTime">14:00</div>
+						<div class="timeChartTime">16:00</div>
+						<div class="timeChartTime">18:00</div>
+						<div class="timeChartTime">20:00</div>
+						<div class="timeChartTime">22:00</div>
+						<div class="timeChartTime">24:00</div>						
+					</div>
+				</div>
+				<div class="timeChartAllTimeBar"></div>
+				<div class="timesSlot">
+				    <!--PlaceHolder-->	
+				</div>			
+			</div>
+			<div class="thresholdsButton">
+			    <div class="saveBtn">
+				    Save
+				</div>
+			</div>
+		</script>
+		<script type="text/template" id="threshold-template">
+		    <div class="thresholdsCell noCellBorder" style="background:<%-barColor%>;">&nbsp;</div>
+			<div class="thresholdsCell selectCell">
+				<select name="startTime" class="<%= (startTime== 'allDay') ? 'allDay' : ''%>">
+					<option value="allDay" <%= (startTime== 'allDay') ? 'selected' : ''%>>all day</option>
+					<option value="00:00"  <%= (startTime== '00:00') ? 'selected' : ''%>>00:00</option>
+					<option value="00:15"  <%= (startTime== '00:15') ? 'selected' : ''%>>00:15</option>
+					<option value="00:30"  <%= (startTime== '00:30') ? 'selected' : ''%>>00:30</option>
+					<option value="00:45"  <%= (startTime== '00:45') ? 'selected' : ''%>>00:45</option>
+					
+					<option value="01:00"  <%= (startTime== '01:00') ? 'selected' : ''%>>01:00</option>
+					<option value="02:00"  <%= (startTime== '02:00') ? 'selected' : ''%>>02:00</option>
+					<option value="04:00"  <%= (startTime== '04:00') ? 'selected' : ''%>>04:00</option>
+					<option value="08:00"  <%= (startTime== '08:00') ? 'selected' : ''%>>08:00</option>
+					<option value="15:00"  <%= (startTime== '15:00') ? 'selected' : ''%>>15:00</option>
+					<option value="20:00"  <%= (startTime== '20:00') ? 'selected' : ''%>>20:00</option>
+					<option value="23:00"  <%= (startTime== '23:00') ? 'selected' : ''%>>23:00</option>
+				</select>
+			</div>
+			<div class="thresholdsCell selectCell">
+				<select name="endTime" style="display:<%= (startTime== 'allDay') ? 'none' : 'block'%>">
+					<option value="00:00"  <%= (endTime== '00:00') ? 'selected' : ''%>>00:00</option>
+					<option value="00:15"  <%= (endTime== '00:15') ? 'selected' : ''%>>00:15</option>
+					<option value="00:30"  <%= (endTime== '00:30') ? 'selected' : ''%>>00:30</option>
+					<option value="00:45"  <%= (endTime== '00:45') ? 'selected' : ''%>>00:45</option>
+					
+					<option value="01:00"  <%= (endTime== '01:00') ? 'selected' : ''%>>01:00</option>
+					<option value="02:00"  <%= (endTime== '02:00') ? 'selected' : ''%>>02:00</option>
+					<option value="04:00"  <%= (endTime== '04:00') ? 'selected' : ''%>>04:00</option>
+					<option value="08:00"  <%= (endTime== '08:00') ? 'selected' : ''%>>08:00</option>
+					<option value="15:00"  <%= (endTime== '15:00') ? 'selected' : ''%>>15:00</option>
+					<option value="20:00"  <%= (endTime== '20:00') ? 'selected' : ''%>>20:00</option>
+					<option value="23:00"  <%= (endTime== '23:00') ? 'selected' : ''%>>23:00</option>
+				</select>
+			</div>
+			<div class="thresholdsCell">
+				<span>when the <em>ErrorSystem</em></span>
+				<select name="operator">
+					<option value="=" <%= (operator== '=') ? 'selected' : ''%>>is equal to(=)</option>
+					<option value=">" <%= (operator== '>') ? 'selected' : ''%>>is greater than(>)</option>
+					<option value="<" <%= (operator== '<') ? 'selected' : ''%>>is less than(<)</option>
+				</select>
+			</div>
+			<div class="thresholdsCell noCellBorder">
+				<div class="warningSec">
+					<input type="text" name="warning" value="<%-warning%>"/>
+					<span>trigger a warning</span>
+				</div>
+				<div class="errorSec">
+					<input type="text" name="error" <%= (warning=='') ? 'disabled' : ''%> value="<%-error%>"/>
+					<span>trigger an error</span>
+				</div>
+				<div class="criticalSec">
+					<input type="text" name="critical" <%= (error=='') ? 'disabled' : ''%> value="<%-critical%>"/>
+					<span>trigger an critical</span>
+				</div>
+			</div>
+			<div class="thresholdsCell noCellBorder">
+			    <img class="delete" src="./img/delete.png"/>
+			</div>			
+		</script>
+		<script type="text/template" id="timeBar-template">
+		    <div class="timeChartTimeBarLeft time<%-id%>" style="width:<%-leftWidth%>;height:<%-barHeight%>;
+					left:<%-selfLeft%>;bottom:<%-barBottom%>;background:<%-barColor%>;"></div>
+			<div class="timeChartTimeBarRight" style="width:<%-rightWidth%>;height:<%-barHeight%>;
+					bottom:<%-barBottom%>;background:<%-barColor%>;"></div>
+		</script>
+		
+    </body>
 </html>
